@@ -6,13 +6,11 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/17 16:05:42 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/19 15:57:34 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-
-#include <iostream>
 
 class Contact {
 
@@ -60,12 +58,9 @@ class Phonebook {
 
 private:
 	Contact contacts[8];
-	int 	index;
+	int 	index = 0;
 
 public:
-	Phonebook() {
-		index = 0;
-	}
 	void addContact(Contact c) {
 		contacts[index] = c;
 		index++;
@@ -82,6 +77,7 @@ public:
 
 int main()
 {
+	bool isvalid;
 	Phonebook book;
 	std::string cmd;
 	std::string input;
@@ -91,26 +87,27 @@ int main()
 		std::cout << "***********************\n";
 		std::cout << "* ADD | SEARCH | EXIT *\n";
 		std::cout << "***********************\n";
-		std::cin >> cmd;
+		std::getline(std::cin, cmd);
 		if(cmd == "ADD")
 		{
 			Contact c;
-			std::cout << "Enter First Name ------: ";
-			std::cin >> input;
+			isvalid = true;
+			user_prompt(isvalid, input);
 			c.setFirstName(input);
-			std::cout << "Enter Last Name -------: ";
-			std::cin >> input;
+			isvalid = true;
+			user_prompt(isvalid, input);
 			c.setLastName(input);
-			std::cout << "Enter Nickname --------: ";
-			std::cin >> input;
+			isvalid = true;
+			user_prompt(isvalid, input);
 			c.setNickName(input);
-			std::cout << "Enter Phone number ----: ";
-			std::cin >> input;
+			isvalid = true;
+			user_prompt(isvalid, input);
 			c.setPhoneNum(input);
-			std::cout << "Enter Darkest Secret --: ";
-			std::cin >> input;
+			isvalid = true;
+			user_prompt(isvalid, input);
 			c.setDarkSecret(input);
 			book.addContact(c);
+			contact_successfull();
 		}
 		if(cmd == "SEARCH")
 		{

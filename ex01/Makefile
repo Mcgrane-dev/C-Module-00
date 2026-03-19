@@ -3,7 +3,7 @@ NAME = phonebook
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror #-std=c++98
 
-SRC = phonebook.cpp
+SRC = phonebook.cpp sleep_print.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
