@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/23 12:31:31 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:41:56 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ class Phonebook {
 private:
 	Contact contacts[8];
 	int 	index = 0;
+	std::string formatColumn(std::string str) const {
+		if(str.length() > 10)
+			return str.substr(0, 9) + ".";
+		else
+		{
+			int spacesNeeded = 10 - str.length();
+			std::string spaces(spacesNeeded, ' ');
+			return spaces + str;
+		}
+	}
 
 public:
 	void addContact(Contact c) {
@@ -77,12 +87,12 @@ public:
 	void searchContact() const {
 		int i;
 		std::string input;
-		std::cout << "Enter contact index 0 - 7: ";
+		std::cout << "Enter contact index 1 - 8: ";
 		std::getline(std::cin, input);
 		i = std::stoi(input);
-		Contact c = contacts[i];
-		std::cout << "FIRST NAME: " << c.getFirstName() << "  LAST NAME: "
-		<< c.getLastName() << "   NICKNAME: " << c.getNickName() << "\n";
+		Contact c = contacts[i - 1];
+		std::cout << "\n" << "|" << c.getIndex() + 1 << "|" << formatColumn(c.getFirstName()) << "|"
+		<< formatColumn(c.getLastName()) << "|" << formatColumn(c.getNickName()) << "|" << "\n\n";
 	}
 };
 
@@ -100,7 +110,7 @@ int main()
 		std::cout << "* ADD | SEARCH | EXIT *\n";
 		std::cout << "***********************\n";
 		std::getline(std::cin, cmd);
-		if(cmd == "ADD")
+		if(cmd == "ADD" || cmd == "A")
 		{
 			Contact c;
 			isvalid = true;
@@ -125,7 +135,7 @@ int main()
 			if(i > 7)
 				i = 0;
 		}
-		if(cmd == "SEARCH")
+		if(cmd == "SEARCH" || cmd == "S")
 		{
 			book.searchContact();
 		}
