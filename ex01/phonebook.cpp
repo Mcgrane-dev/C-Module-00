@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/23 13:41:56 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/23 15:59:02 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ private:
 	std::string darkSecret;
 
 public:
+    Contact() : index(-1), lastName("EMPTY"), nickName("EMPTY"), phoneNum(""), firstName("EMPTY"), darkSecret("") {}
+	
 	void setFirstName(std::string f) {
 		firstName = f;
 	}
@@ -85,11 +87,19 @@ public:
 			index = 0;
 	}
 	void searchContact() const {
-		int i;
+		int i = 0;
 		std::string input;
-		std::cout << "Enter contact index 1 - 8: ";
-		std::getline(std::cin, input);
-		i = std::stoi(input);
+		while(!(i >= 1 && i <= 8))
+		{
+			std::cout << "Enter contact index 1 - 8: ";
+			std::getline(std::cin, input);
+			if(input.length() > 1 ||!(input >= "1" && input <= "8"))
+			{
+				std::cout << "Invalid index!\n";
+				continue;
+			}
+			i = std::stoi(input);
+		}
 		Contact c = contacts[i - 1];
 		std::cout << "\n" << "|" << c.getIndex() + 1 << "|" << formatColumn(c.getFirstName()) << "|"
 		<< formatColumn(c.getLastName()) << "|" << formatColumn(c.getNickName()) << "|" << "\n\n";
@@ -98,11 +108,11 @@ public:
 
 int main()
 {
-	int			i = 0;
-	bool		isvalid;
 	Phonebook	book;
 	std::string	cmd;
 	std::string	input;
+	int			i = 0;
+	bool		isvalid;
 
 	while(cmd != "EXIT")
 	{
@@ -130,7 +140,7 @@ int main()
 			c.setDarkSecret(input);
 			c.setIndex(i);
 			book.addContact(c);
-			// contact_successfull();
+			contact_successfull();
 			i++;
 			if(i > 7)
 				i = 0;

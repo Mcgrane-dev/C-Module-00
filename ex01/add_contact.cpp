@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:00:42 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/23 12:27:19 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:07:33 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void user_prompt(bool isvalid, std::string &input)
 		{
 			if(j == 3)
 			{
-				if(!isdigit(input[i]))
+				if(!isdigit(input[i]) || input.length() > 15)
 				{
-					std::cout << "Invalid Character Found!\n";
+					std::cout << "Invalid!\n";
 					break;
 				}
 			}
