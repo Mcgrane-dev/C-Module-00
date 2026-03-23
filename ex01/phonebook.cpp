@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/19 15:57:34 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/23 12:31:31 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 class Contact {
 
 private:
+	int 		index;
 	std::string lastName;
 	std::string nickName;
 	std::string phoneNum;
@@ -43,7 +44,7 @@ public:
 	void setNickName(std::string n) {
 		nickName = n;
 	}
-	std::string getnickName() const {
+	std::string getNickName() const {
 		return nickName;
 	}
 	void setDarkSecret(std::string d) {
@@ -51,6 +52,12 @@ public:
 	}
 	std::string getDarkSecret() const {
 		return darkSecret;
+	}
+	void setIndex(int i){
+		index = i;
+	}
+	int getIndex() const {
+		return index;
 	}
 };
 
@@ -67,20 +74,25 @@ public:
 		if (index > 7)
 			index = 0;
 	}
-	void displayContacts() const {
-		for(int i = 0; i < 8; i++)
-			std::cout<<contacts[i].getFirstName()<<" | "
-			<<contacts[i].getLastName()<< " | "<<
-			contacts[i].getPhoneNum() << "\n";		
+	void searchContact() const {
+		int i;
+		std::string input;
+		std::cout << "Enter contact index 0 - 7: ";
+		std::getline(std::cin, input);
+		i = std::stoi(input);
+		Contact c = contacts[i];
+		std::cout << "FIRST NAME: " << c.getFirstName() << "  LAST NAME: "
+		<< c.getLastName() << "   NICKNAME: " << c.getNickName() << "\n";
 	}
 };
 
 int main()
 {
-	bool isvalid;
-	Phonebook book;
-	std::string cmd;
-	std::string input;
+	int			i = 0;
+	bool		isvalid;
+	Phonebook	book;
+	std::string	cmd;
+	std::string	input;
 
 	while(cmd != "EXIT")
 	{
@@ -106,12 +118,17 @@ int main()
 			isvalid = true;
 			user_prompt(isvalid, input);
 			c.setDarkSecret(input);
+			c.setIndex(i);
 			book.addContact(c);
-			contact_successfull();
+			// contact_successfull();
+			i++;
+			if(i > 7)
+				i = 0;
 		}
 		if(cmd == "SEARCH")
 		{
-			book.displayContacts();
+			book.searchContact();
 		}
 	}
+	std::cout << "BYE!\n";
 }

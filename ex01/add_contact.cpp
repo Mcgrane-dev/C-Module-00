@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep_print.cpp                                    :+:      :+:    :+:   */
+/*   add_contact.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:00:42 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/19 16:04:43 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/23 12:27:19 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void contact_successfull()
 {
 	int	i = 0;
-	std::string msg = "\n--- CONTACT ADDED SUCCESSFULLY! ---\n\n";
+	std::string msg = "\n--- CONTACT SUCCESSFULLY ADDED! ---\n\n";
 
 	while(msg[i])
 	{
@@ -26,7 +26,7 @@ void contact_successfull()
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
-void user_prompt(bool isvalid, std::string input)
+void user_prompt(bool isvalid, std::string &input)
 {
 	size_t i = 0;
 	static size_t j = 0;
@@ -42,7 +42,10 @@ void user_prompt(bool isvalid, std::string input)
 		std::cout << prompts[j];
 		std::getline(std::cin, input);
 		if(input.length() == 0)
+		{
+			std::cout << "No empty fields!\n";
 			continue;
+		}
 		for(i = 0; input[i]; i++)
 		{
 			if(j == 3)
@@ -73,4 +76,6 @@ void user_prompt(bool isvalid, std::string input)
 			j++;
 		}
 	}
+	if (j == 5)
+		j = 0;
 }
