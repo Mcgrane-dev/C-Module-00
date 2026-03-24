@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 13:26:41 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 15:38:40 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:17:36 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ private:
 
 public:
 	void addContact(Contact c);
-	void displayContact() const;
+	void displayContacts() const;
+
+	Contact getContact(int i) const {
+		return contacts[i];
+	}
 };
 
 void contact_successfull();

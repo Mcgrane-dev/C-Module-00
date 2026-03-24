@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 15:40:16 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:18:16 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int main()
 		if(cmd == "SEARCH" || cmd == "S")
 		{
 			int j = 0;
-			book.displayContact();
+			book.displayContacts();
 			std::string input;
-
+			std::cout << "\n";
 			while(!(j >= 1 && j <= 8))
 			{
-				std::cout << "\nEnter contact index 1 - 8: ";
+				std::cout << "Enter contact index 1 - 8: ";
 				std::getline(std::cin, input);
 				if(input.length() > 1 ||!(input >= "1" && input <= "8"))
 				{
@@ -68,6 +68,8 @@ int main()
 					continue;
 				}
 				j = std::stoi(input);
+				Contact d = book.getContact(j);
+				std::cout << "First Name: " << d.getFirstName() << "\n";
 			}
 		}
 	}

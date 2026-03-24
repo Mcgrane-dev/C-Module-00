@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:00:42 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 15:40:26 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:08:59 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void Phonebook::addContact(Contact c)
 		index = 1;
 }
 
-void Phonebook::displayContact() const
+void Phonebook::displayContacts() const
 {
 	int i = 1;
 	std::string spaces(9, ' ');
