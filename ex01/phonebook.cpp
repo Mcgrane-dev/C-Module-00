@@ -6,119 +6,26 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/23 15:59:02 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:29:43 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-
-class Contact {
-
-private:
-	int 		index;
-	std::string lastName;
-	std::string nickName;
-	std::string phoneNum;
-	std::string firstName;
-	std::string darkSecret;
-
-public:
-    Contact() : index(-1), lastName("EMPTY"), nickName("EMPTY"), phoneNum(""), firstName("EMPTY"), darkSecret("") {}
-	
-	void setFirstName(std::string f) {
-		firstName = f;
-	}
-	std::string getFirstName() const {
-		return firstName;
-	}
-	void setLastName(std::string l) {
-		lastName = l;
-	}
-	std::string getLastName() const {
-		return lastName;
-	}
-	void setPhoneNum(std::string p) {
-		phoneNum = p;
-	}
-	std::string getPhoneNum() const {
-		return phoneNum;
-	}
-	void setNickName(std::string n) {
-		nickName = n;
-	}
-	std::string getNickName() const {
-		return nickName;
-	}
-	void setDarkSecret(std::string d) {
-		darkSecret = d;
-	}
-	std::string getDarkSecret() const {
-		return darkSecret;
-	}
-	void setIndex(int i){
-		index = i;
-	}
-	int getIndex() const {
-		return index;
-	}
-};
-
-class Phonebook {
-
-private:
-	Contact contacts[8];
-	int 	index = 0;
-	std::string formatColumn(std::string str) const {
-		if(str.length() > 10)
-			return str.substr(0, 9) + ".";
-		else
-		{
-			int spacesNeeded = 10 - str.length();
-			std::string spaces(spacesNeeded, ' ');
-			return spaces + str;
-		}
-	}
-
-public:
-	void addContact(Contact c) {
-		contacts[index] = c;
-		index++;
-		if (index > 7)
-			index = 0;
-	}
-	void searchContact() const {
-		int i = 0;
-		std::string input;
-		while(!(i >= 1 && i <= 8))
-		{
-			std::cout << "Enter contact index 1 - 8: ";
-			std::getline(std::cin, input);
-			if(input.length() > 1 ||!(input >= "1" && input <= "8"))
-			{
-				std::cout << "Invalid index!\n";
-				continue;
-			}
-			i = std::stoi(input);
-		}
-		Contact c = contacts[i - 1];
-		std::cout << "\n" << "|" << c.getIndex() + 1 << "|" << formatColumn(c.getFirstName()) << "|"
-		<< formatColumn(c.getLastName()) << "|" << formatColumn(c.getNickName()) << "|" << "\n\n";
-	}
-};
 
 int main()
 {
 	Phonebook	book;
 	std::string	cmd;
 	std::string	input;
-	int			i = 0;
-	bool		isvalid;
+	int			i = 1;
+	bool		isvalid = true;
 
 	while(cmd != "EXIT")
 	{
 		std::cout << "***********************\n";
 		std::cout << "* ADD | SEARCH | EXIT *\n";
 		std::cout << "***********************\n";
+		std::cout << "==> ";
 		std::getline(std::cin, cmd);
 		if(cmd == "ADD" || cmd == "A")
 		{
@@ -142,13 +49,17 @@ int main()
 			book.addContact(c);
 			contact_successfull();
 			i++;
-			if(i > 7)
-				i = 0;
+			if(i > 8)
+				i = 1;
 		}
 		if(cmd == "SEARCH" || cmd == "S")
 		{
-			book.searchContact();
+			book.displayContact();
 		}
 	}
 	std::cout << "BYE!\n";
 }
+//TO DO
+
+//rm A and S
+//add spaces on first name

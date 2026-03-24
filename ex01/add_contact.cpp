@@ -6,7 +6,7 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:00:42 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/23 16:07:33 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:39:05 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void contact_successfull()
 	{
 		std::cout << msg[i] << std::flush;
 		i++;
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void user_prompt(bool isvalid, std::string &input)
@@ -50,7 +50,7 @@ void user_prompt(bool isvalid, std::string &input)
 		{
 			if(j == 3)
 			{
-				if(!isdigit(input[i]) || input.length() > 15)
+				if((!isdigit(input[i]) && input[i] != '-') || input.length() > 15)
 				{
 					std::cout << "Invalid!\n";
 					break;
@@ -58,13 +58,13 @@ void user_prompt(bool isvalid, std::string &input)
 			}
 			else if(j == 4)
 			{
-				if(!isalpha(input[i]) && !' ')
+				if(!isalpha(input[i]) && input[i] != ' ')
 				{
 					std::cout << "Invalid Character Found!\n";
 					break;	
 				}
 			}
-			else if(!isalpha(input[i]))
+			else if(!isalpha(input[i]) && input[i] != ' ')
 			{
 				std::cout << "Invalid Character Found!\n";
 				break;
