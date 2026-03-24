@@ -6,11 +6,33 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:00:42 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 12:39:05 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:40:26 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "Phonebook.hpp"
+
+void Phonebook::addContact(Contact c)
+{
+	contacts[index] = c;
+	index++;
+	if (index > 8)
+		index = 1;
+}
+
+void Phonebook::displayContact() const
+{
+	int i = 1;
+	std::string spaces(9, ' ');
+	
+	while(i < 9)
+	{
+		Contact c = contacts[i];
+		std::cout << "\n" << "|" << spaces << c.getIndex() << "|" << formatColumn(c.getFirstName()) << "|"
+		<< formatColumn(c.getLastName()) << "|" << formatColumn(c.getNickName()) << "|" << "\n";
+		i++;
+	}
+}
 
 void contact_successfull()
 {
@@ -58,7 +80,7 @@ void user_prompt(bool isvalid, std::string &input)
 			}
 			else if(j == 4)
 			{
-				if(!isalpha(input[i]) && input[i] != ' ')
+				if(!isalpha(input[i]) && input[i] != ' ' && !isdigit(input[i]))
 				{
 					std::cout << "Invalid Character Found!\n";
 					break;	

@@ -6,11 +6,11 @@
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:04:54 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 12:29:43 by jmcgrane         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:40:16 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "Phonebook.hpp"
 
 int main()
 {
@@ -54,12 +54,28 @@ int main()
 		}
 		if(cmd == "SEARCH" || cmd == "S")
 		{
+			int j = 0;
 			book.displayContact();
+			std::string input;
+
+			while(!(j >= 1 && j <= 8))
+			{
+				std::cout << "\nEnter contact index 1 - 8: ";
+				std::getline(std::cin, input);
+				if(input.length() > 1 ||!(input >= "1" && input <= "8"))
+				{
+					std::cout << "Invalid index!\n";
+					continue;
+				}
+				j = std::stoi(input);
+			}
 		}
 	}
 	std::cout << "BYE!\n";
 }
+
 //TO DO
 
 //rm A and S
 //add spaces on first name
+//display individual contacts

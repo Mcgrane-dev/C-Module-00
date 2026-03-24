@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmcgrane <jmcgrane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 13:26:41 by jmcgrane          #+#    #+#             */
-/*   Updated: 2026/03/24 12:26:48 by jmcgrane         ###   ########.fr       */
+/*   Created: 2026/03/24 15:38:06 by jmcgrane          #+#    #+#             */
+/*   Updated: 2026/03/24 15:39:51 by jmcgrane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <thread>
-#include <chrono>
-#include <iostream>
+#ifndef CONTACT_H
+#define CONTACT_H
+
+#include "Phonebook.hpp"
 
 class Contact {
 
@@ -65,56 +66,4 @@ public:
 	}
 };
 
-class Phonebook {
-
-private:
-	Contact contacts[9];
-	int 	index = 1;
-	std::string formatColumn(std::string str) const {
-		if(str.length() > 10)
-			return str.substr(0, 9) + ".";
-		else
-		{
-			int spacesNeeded = 10 - str.length();
-			std::string spaces(spacesNeeded, ' ');
-			return spaces + str;
-		}
-	}
-
-public:
-	void addContact(Contact c) {
-		contacts[index] = c;
-		index++;
-		if (index > 8)
-			index = 1;
-	}
-	void displayContact() const {
-		
-		int i = 1;
-		std::string spaces(9, ' ');
-
-		while(i < 9)
-		{
-			Contact c = contacts[i];
-			std::cout << "\n" << "|" << spaces << c.getIndex() << "|" << formatColumn(c.getFirstName()) << "|"
-			<< formatColumn(c.getLastName()) << "|" << formatColumn(c.getNickName()) << "|" << "\n";
-			i++;
-		}
-
-		// std::string input;
-		// while(!(i >= 1 && i <= 8))
-		// {
-		// 	std::cout << "Enter contact index 1 - 8: ";
-		// 	std::getline(std::cin, input);
-		// 	if(input.length() > 1 ||!(input >= "1" && input <= "8"))
-		// 	{
-		// 		std::cout << "Invalid index!\n";
-		// 		continue;
-		// 	}
-		// 	i = std::stoi(input);
-		// }
-	}
-};
-
-void contact_successfull();
-void user_prompt(bool isvalid, std::string &input);
+#endif
